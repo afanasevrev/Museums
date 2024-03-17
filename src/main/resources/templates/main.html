@@ -1,28 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Музеи городов России</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8"/>
+  <title>Application</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="table">
-  <div class="row header">
-    <div class="cell">Заголовок 1</div>
-    <div class="cell">Заголовок 2</div>
-    <div class="cell">Заголовок 3</div>
-  </div>
-  <div class="row">
-    <div class="cell">Ячейка 1</div>
-    <div class="cell">Ячейка 2</div>
-    <div class="cell">Ячейка 3</div>
-  </div>
-  <div class="row">
-    <div class="cell">Ячейка 4</div>
-    <div class="cell">Ячейка 5</div>
-    <div class="cell">Ячейка 6</div>
-  </div>
+<div class="container">
+  <h1>Музеи городов России</h1>
+  <span th:if="${museums.size() == 0}">Список музеев пустой</span>
+  <table th:if="${museums.size() > 0}" class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <td>Id</td>
+      <td>Наименование</td>
+      <td>Город</td>
+      <td></td>
+      <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="museum : ${museums}">
+      <td th:text="${museum.id}"/>
+      <td th:text="${museum.name}"/>
+      <td th:text="${museum.city}"/>
+      <td><a class="btn btn-secondary" th:href="@{'/details/' + ${museum.id}}">Выбрать</a></td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 </body>
 </html>
